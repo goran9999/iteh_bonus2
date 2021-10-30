@@ -104,16 +104,22 @@ $('#izmeniForm').submit(function () {
 
     // kreirati request za UPDATE handler
 
+    request=$.ajax({
+        url:'handler/update.php',
+        type:'post',
+        data:serializedData
+    })
+
     request.done(function (response, textStatus, jqXHR) {
-
-
-        if (response === 'Success') {
+        console.log(response);
+        if (response.trim()=="Success") {
             console.log('Kolokvijum je izmenjen');
+            alert("Kolokvijum je izmenjen")
             location.reload(true);
             //$('#izmeniForm').reset;
         }
-        else console.log('Kolokvijum nije izmenjen ' + response);
-        console.log(response);
+        else alert('Kolokvijum nije izmenjen ' + response);
+        
     });
 
     request.fail(function (jqXHR, textStatus, errorThrown) {
